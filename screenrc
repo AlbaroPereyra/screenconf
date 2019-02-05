@@ -77,7 +77,6 @@ startup_message off
 ## You can select the screen you want to show up using the
 ## '-p' command line argument.
 
-screen -t e 1 /Applications/Emacs.app/Contents/MacOS/Emacs -nw
-screen -t mmain 2 mosh ec2-user@www.mytopmedia.com --ssh="ssh -p 2222"
-screen -t mail 3 mutt
-screen -t htop 4 nice htop
+# screen -t editor 1 emacs
+# screen -t mail 2 mutt
+# screen -t htop 3 nice htop

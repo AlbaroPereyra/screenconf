@@ -1,0 +1,83 @@
+## Add support for 256 colours
+term "screen-256color-bce"
+
+# enables minibuffer for apps like htop, less then returns and clears the screen
+altscreen on 
+
+## terminfo and termcap for nice 256 color terminal
+## allow bold colors - necessary for some reason
+attrcolor b ".I"
+attrcolor i ".I"
+attrcolor u ".I"
+
+## tell screen how to set colors. AB = background, AF=foreground
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+
+## erase background with current bg color
+# This is suppose to fix the background issue
+defbce "on"
+
+## I want more scrollback
+defscrollback 20480
+
+## Let's try and stop using Ctrl-A (use `)
+escape ``
+
+## Bind some other sequences on the number row
+bind '-' windowlist
+bind '=' screen
+## remove locking bind
+bind ^x
+bind x
+
+## add bindings for focus naviation
+bind h focus left
+bind j focus down
+bind k focus up
+bind l focus right
+bind t focus top
+bind b focus bottom
+
+## Set the caption to show:
+##   current window
+##   other windows
+##   date/time
+caption always "%{Rk}@%H%{kk} %{Yk} %n %t %{-b -s}%{kk} %{wb}%W %= %{kk} %{wB} %c %D %d %M "
+caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %LD %d %LM - %c"
+
+encoding UTF-8 UTF-8
+defencoding UTF-8
+
+## don't use 0, just 1-9
+bind c  screen 1
+bind ^c screen 1
+bind 0 select 10
+
+## Remove license at startup
+startup_message off
+
+
+## Resizing notes:
+# resize +N       increase current region by N
+# resize -N       decrease current region by N
+# resize N        set current region to N
+# resize 20%      set current region to 20% of original size
+# resize +20%     increase current region by 20%
+# resize -b =     make all windows equally
+# resize max      maximize current region
+# resize min      minimize current region
+
+
+
+## Default screens in the format
+##
+##   screen [screen_options] screen_number [shell_command]
+##
+## The last screen started is the first one that shows up
+## You can select the screen you want to show up using the
+## '-p' command line argument.
+
+screen -t e 1 /Applications/Emacs.app/Contents/MacOS/Emacs -nw
+screen -t mmain 2 mosh ec2-user@www.mytopmedia.com --ssh="ssh -p 2222"
+screen -t mail 3 mutt
+screen -t htop 4 nice htop

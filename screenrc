@@ -1,5 +1,5 @@
 ## Add support for 256 colours
-term "screen-256color-bce"
+term "screen-256color"
 
 # enables minibuffer for apps like htop, less then returns and clears the screen
 altscreen on 
@@ -11,7 +11,7 @@ attrcolor i ".I"
 attrcolor u ".I"
 
 ## tell screen how to set colors. AB = background, AF=foreground
-termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+termcapinfo screen-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 
 ## erase background with current bg color
 # This is suppose to fix the background issue
@@ -19,6 +19,40 @@ defbce "on"
 
 ## I want more scrollback
 defscrollback 20480
+
+
+## Turn off flow, this allow to press C-s, and C-q
+defflow off
+
+## Message wait time, default is 5 seconds.
+msgwait 15
+
+## Hardcopy settings
+hardcopy_append on
+
+## Turn on loggin by default
+deflog on
+
+
+## Set the caption to show:
+##   current window
+##   other windows
+##   date/time
+#caption always "%{Rk}@%H%{kk} %{Yk} %n %t %{-b -s}%{kk} %{wb}%W %= %{kk} %{wB} %c %D %d %M "
+caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %l - %LD %LM %d %Y - %C:%s%A"
+
+# set enconding
+encoding UTF-8 UTF-8
+
+# test the following setting:
+# gives more info on commands
+verbose on
+# blanks the screen after set time
+#idle 60 blanker
+
+### KEY BINDINGS ###
+
+
 
 ## Let's try and stop using Ctrl-A (use `)
 escape ``
@@ -37,16 +71,6 @@ bind k focus up
 bind l focus right
 bind t focus top
 bind b focus bottom
-
-## Set the caption to show:
-##   current window
-##   other windows
-##   date/time
-caption always "%{Rk}@%H%{kk} %{Yk} %n %t %{-b -s}%{kk} %{wb}%W %= %{kk} %{wB} %c %D %d %M "
-caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %LD %d %LM - %c"
-
-encoding UTF-8 UTF-8
-defencoding UTF-8
 
 ## don't use 0, just 1-9
 bind c  screen 1
@@ -67,7 +91,9 @@ startup_message off
 # resize max      maximize current region
 # resize min      minimize current region
 
-
+#window ordering commands
+# :bumpleft, :bumpright, :collapse - removes number gaps, :number [[-|+]N]
+# - where N is the number to swap with or to move to.
 
 ## Default screens in the format
 ##

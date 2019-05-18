@@ -1,4 +1,4 @@
-## Add support for 256 colours
+## Add support for 256 colors
 term "screen-256color"
 
 # enables minibuffer for apps like htop, less then returns and clears the screen

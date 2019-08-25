@@ -32,7 +32,7 @@ hardcopy_append on
 
 ## Turn on loggin by default
 deflog on
-
+logfile /var/log/screen.log
 
 ## Set the caption to show:
 ##   current window
